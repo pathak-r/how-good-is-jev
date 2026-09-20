@@ -86,8 +86,8 @@ export function CompareLab() {
           }}
         />
         <p className="mt-4 text-sm leading-6 text-mute">
-          Each model reads one utterance and must pick one of {intentCount} labeled intents. Dataset
-          examples hide the ground truth until both calls finish. Traces, latency, and a cost
+          Each model reads an utterance from the chosen dataset and must pick one of {intentCount}{" "}
+          labeled intents. Ground truth is shown when both calls finish. Traces, latency, and a cost
           comparison are also shown.
         </p>
       </div>
