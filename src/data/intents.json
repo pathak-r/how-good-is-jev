@@ -1,0 +1,902 @@
+[
+  {
+    "id": "transfer",
+    "label": "transfer",
+    "domain": "banking",
+    "description": "Move money between the user's own bank accounts."
+  },
+  {
+    "id": "transactions",
+    "label": "transactions",
+    "domain": "banking",
+    "description": "List recent bank transactions or account activity."
+  },
+  {
+    "id": "balance",
+    "label": "balance",
+    "domain": "banking",
+    "description": "Check the current bank account balance."
+  },
+  {
+    "id": "freeze_account",
+    "label": "freeze account",
+    "domain": "banking",
+    "description": "Freeze or lock a bank account."
+  },
+  {
+    "id": "pay_bill",
+    "label": "pay bill",
+    "domain": "banking",
+    "description": "Pay a bill from a bank account."
+  },
+  {
+    "id": "bill_balance",
+    "label": "bill balance",
+    "domain": "banking",
+    "description": "Ask how much is owed on a bill."
+  },
+  {
+    "id": "bill_due",
+    "label": "bill due",
+    "domain": "banking",
+    "description": "Ask when a bill is due."
+  },
+  {
+    "id": "interest_rate",
+    "label": "interest rate",
+    "domain": "banking",
+    "description": "Ask about a bank or savings interest rate."
+  },
+  {
+    "id": "routing",
+    "label": "routing",
+    "domain": "banking",
+    "description": "Ask for a bank routing number."
+  },
+  {
+    "id": "min_payment",
+    "label": "min payment",
+    "domain": "banking",
+    "description": "Ask the minimum payment due."
+  },
+  {
+    "id": "order_checks",
+    "label": "order checks",
+    "domain": "banking",
+    "description": "Order new paper checks."
+  },
+  {
+    "id": "pin_change",
+    "label": "pin change",
+    "domain": "banking",
+    "description": "Change a bank or debit card PIN."
+  },
+  {
+    "id": "report_fraud",
+    "label": "report fraud",
+    "domain": "banking",
+    "description": "Report fraudulent bank activity."
+  },
+  {
+    "id": "account_blocked",
+    "label": "account blocked",
+    "domain": "banking",
+    "description": "Ask why a bank account is blocked or restricted."
+  },
+  {
+    "id": "spending_history",
+    "label": "spending history",
+    "domain": "banking",
+    "description": "Review spending history or category spend."
+  },
+  {
+    "id": "credit_score",
+    "label": "credit score",
+    "domain": "credit_cards",
+    "description": "Check the user's credit score."
+  },
+  {
+    "id": "report_lost_card",
+    "label": "report lost card",
+    "domain": "credit_cards",
+    "description": "Report a lost or stolen credit card."
+  },
+  {
+    "id": "credit_limit",
+    "label": "credit limit",
+    "domain": "credit_cards",
+    "description": "Ask the current credit card limit."
+  },
+  {
+    "id": "rewards_balance",
+    "label": "rewards balance",
+    "domain": "credit_cards",
+    "description": "Check credit card rewards or points balance."
+  },
+  {
+    "id": "new_card",
+    "label": "new card",
+    "domain": "credit_cards",
+    "description": "Request or activate a new credit card."
+  },
+  {
+    "id": "application_status",
+    "label": "application status",
+    "domain": "credit_cards",
+    "description": "Check status of a credit card application."
+  },
+  {
+    "id": "card_declined",
+    "label": "card declined",
+    "domain": "credit_cards",
+    "description": "Ask why a card payment was declined."
+  },
+  {
+    "id": "international_fees",
+    "label": "international fees",
+    "domain": "credit_cards",
+    "description": "Ask about foreign transaction or international fees."
+  },
+  {
+    "id": "apr",
+    "label": "apr",
+    "domain": "credit_cards",
+    "description": "Ask about a card APR or interest rate."
+  },
+  {
+    "id": "redeem_rewards",
+    "label": "redeem rewards",
+    "domain": "credit_cards",
+    "description": "Redeem credit card rewards or points."
+  },
+  {
+    "id": "credit_limit_change",
+    "label": "credit limit change",
+    "domain": "credit_cards",
+    "description": "Request a credit limit increase or change."
+  },
+  {
+    "id": "damaged_card",
+    "label": "damaged card",
+    "domain": "credit_cards",
+    "description": "Replace a damaged credit or debit card."
+  },
+  {
+    "id": "replacement_card_duration",
+    "label": "replacement card duration",
+    "domain": "credit_cards",
+    "description": "Ask how long a replacement card will take to arrive."
+  },
+  {
+    "id": "improve_credit_score",
+    "label": "improve credit score",
+    "domain": "credit_cards",
+    "description": "Ask how to improve a credit score."
+  },
+  {
+    "id": "expiration_date",
+    "label": "expiration date",
+    "domain": "credit_cards",
+    "description": "Ask when a card expires."
+  },
+  {
+    "id": "accept_reservations",
+    "label": "accept reservations",
+    "domain": "kitchen_dining",
+    "description": "Ask whether a restaurant accepts reservations."
+  },
+  {
+    "id": "cancel_reservation",
+    "label": "cancel reservation",
+    "domain": "kitchen_dining",
+    "description": "Cancel a restaurant reservation."
+  },
+  {
+    "id": "confirm_reservation",
+    "label": "confirm reservation",
+    "domain": "kitchen_dining",
+    "description": "Confirm an existing restaurant reservation."
+  },
+  {
+    "id": "cook_time",
+    "label": "cook time",
+    "domain": "kitchen_dining",
+    "description": "Ask how long a dish takes to cook."
+  },
+  {
+    "id": "calories",
+    "label": "calories",
+    "domain": "kitchen_dining",
+    "description": "Ask calorie information for food."
+  },
+  {
+    "id": "food_last",
+    "label": "food last",
+    "domain": "kitchen_dining",
+    "description": "Ask how long leftover food will last."
+  },
+  {
+    "id": "how_busy",
+    "label": "how busy",
+    "domain": "kitchen_dining",
+    "description": "Ask how busy a restaurant is."
+  },
+  {
+    "id": "ingredient_substitution",
+    "label": "ingredient substitution",
+    "domain": "kitchen_dining",
+    "description": "Ask for a substitute ingredient."
+  },
+  {
+    "id": "ingredients_list",
+    "label": "ingredients list",
+    "domain": "kitchen_dining",
+    "description": "Ask for the ingredients in a recipe or dish."
+  },
+  {
+    "id": "meal_suggestion",
+    "label": "meal suggestion",
+    "domain": "kitchen_dining",
+    "description": "Ask for a meal idea or what to cook."
+  },
+  {
+    "id": "nutrition_info",
+    "label": "nutrition info",
+    "domain": "kitchen_dining",
+    "description": "Ask for nutrition facts beyond calories."
+  },
+  {
+    "id": "recipe",
+    "label": "recipe",
+    "domain": "kitchen_dining",
+    "description": "Ask for a recipe."
+  },
+  {
+    "id": "restaurant_reservation",
+    "label": "restaurant reservation",
+    "domain": "kitchen_dining",
+    "description": "Make a restaurant reservation."
+  },
+  {
+    "id": "restaurant_reviews",
+    "label": "restaurant reviews",
+    "domain": "kitchen_dining",
+    "description": "Ask for restaurant reviews."
+  },
+  {
+    "id": "restaurant_suggestion",
+    "label": "restaurant suggestion",
+    "domain": "kitchen_dining",
+    "description": "Ask for a restaurant recommendation."
+  },
+  {
+    "id": "calendar",
+    "label": "calendar",
+    "domain": "home",
+    "description": "Ask what is on the calendar."
+  },
+  {
+    "id": "calendar_update",
+    "label": "calendar update",
+    "domain": "home",
+    "description": "Add or change a calendar event."
+  },
+  {
+    "id": "next_song",
+    "label": "next song",
+    "domain": "home",
+    "description": "Skip to the next song."
+  },
+  {
+    "id": "order",
+    "label": "order",
+    "domain": "home",
+    "description": "Place an order for a product."
+  },
+  {
+    "id": "order_status",
+    "label": "order status",
+    "domain": "home",
+    "description": "Check the status of an existing order."
+  },
+  {
+    "id": "play_music",
+    "label": "play music",
+    "domain": "home",
+    "description": "Play music."
+  },
+  {
+    "id": "reminder",
+    "label": "reminder",
+    "domain": "home",
+    "description": "Ask about an existing reminder."
+  },
+  {
+    "id": "reminder_update",
+    "label": "reminder update",
+    "domain": "home",
+    "description": "Create or change a reminder."
+  },
+  {
+    "id": "shopping_list",
+    "label": "shopping list",
+    "domain": "home",
+    "description": "Read the shopping list."
+  },
+  {
+    "id": "shopping_list_update",
+    "label": "shopping list update",
+    "domain": "home",
+    "description": "Add or remove shopping list items."
+  },
+  {
+    "id": "smart_home",
+    "label": "smart home",
+    "domain": "home",
+    "description": "Control smart home devices."
+  },
+  {
+    "id": "todo_list",
+    "label": "todo list",
+    "domain": "home",
+    "description": "Read the to-do list."
+  },
+  {
+    "id": "todo_list_update",
+    "label": "todo list update",
+    "domain": "home",
+    "description": "Add or change to-do list items."
+  },
+  {
+    "id": "update_playlist",
+    "label": "update playlist",
+    "domain": "home",
+    "description": "Add or change songs on a playlist."
+  },
+  {
+    "id": "what_song",
+    "label": "what song",
+    "domain": "home",
+    "description": "Identify the currently playing song."
+  },
+  {
+    "id": "current_location",
+    "label": "current location",
+    "domain": "auto_commute",
+    "description": "Ask the user's current location."
+  },
+  {
+    "id": "directions",
+    "label": "directions",
+    "domain": "auto_commute",
+    "description": "Get driving or transit directions."
+  },
+  {
+    "id": "distance",
+    "label": "distance",
+    "domain": "auto_commute",
+    "description": "Ask the distance to a place."
+  },
+  {
+    "id": "gas",
+    "label": "gas",
+    "domain": "auto_commute",
+    "description": "Find nearby gas stations or gas prices."
+  },
+  {
+    "id": "gas_type",
+    "label": "gas type",
+    "domain": "auto_commute",
+    "description": "Ask what type of gas a car uses."
+  },
+  {
+    "id": "jump_start",
+    "label": "jump start",
+    "domain": "auto_commute",
+    "description": "Ask how to jump-start a car."
+  },
+  {
+    "id": "last_maintenance",
+    "label": "last maintenance",
+    "domain": "auto_commute",
+    "description": "Ask when the car was last serviced."
+  },
+  {
+    "id": "mpg",
+    "label": "mpg",
+    "domain": "auto_commute",
+    "description": "Ask the car's fuel economy / MPG."
+  },
+  {
+    "id": "oil_change_how",
+    "label": "oil change how",
+    "domain": "auto_commute",
+    "description": "Ask how to change the oil."
+  },
+  {
+    "id": "oil_change_when",
+    "label": "oil change when",
+    "domain": "auto_commute",
+    "description": "Ask when an oil change is due."
+  },
+  {
+    "id": "schedule_maintenance",
+    "label": "schedule maintenance",
+    "domain": "auto_commute",
+    "description": "Schedule car maintenance."
+  },
+  {
+    "id": "tire_change",
+    "label": "tire change",
+    "domain": "auto_commute",
+    "description": "Ask about changing or replacing tires."
+  },
+  {
+    "id": "tire_pressure",
+    "label": "tire pressure",
+    "domain": "auto_commute",
+    "description": "Ask about tire pressure."
+  },
+  {
+    "id": "traffic",
+    "label": "traffic",
+    "domain": "auto_commute",
+    "description": "Ask about current traffic conditions."
+  },
+  {
+    "id": "uber",
+    "label": "uber",
+    "domain": "auto_commute",
+    "description": "Book a rideshare such as Uber."
+  },
+  {
+    "id": "book_flight",
+    "label": "book flight",
+    "domain": "travel",
+    "description": "Book a flight."
+  },
+  {
+    "id": "book_hotel",
+    "label": "book hotel",
+    "domain": "travel",
+    "description": "Book a hotel."
+  },
+  {
+    "id": "car_rental",
+    "label": "car rental",
+    "domain": "travel",
+    "description": "Rent a car."
+  },
+  {
+    "id": "travel_suggestion",
+    "label": "travel suggestion",
+    "domain": "travel",
+    "description": "Ask for travel destination ideas."
+  },
+  {
+    "id": "travel_alert",
+    "label": "travel alert",
+    "domain": "travel",
+    "description": "Ask about travel warnings or alerts."
+  },
+  {
+    "id": "travel_notification",
+    "label": "travel notification",
+    "domain": "travel",
+    "description": "Set a travel notification with a bank or airline."
+  },
+  {
+    "id": "carry_on",
+    "label": "carry on",
+    "domain": "travel",
+    "description": "Ask about carry-on baggage rules."
+  },
+  {
+    "id": "timezone",
+    "label": "timezone",
+    "domain": "travel",
+    "description": "Ask the time zone of a place."
+  },
+  {
+    "id": "vaccines",
+    "label": "vaccines",
+    "domain": "travel",
+    "description": "Ask about travel vaccines."
+  },
+  {
+    "id": "translate",
+    "label": "translate",
+    "domain": "travel",
+    "description": "Translate a word or phrase."
+  },
+  {
+    "id": "flight_status",
+    "label": "flight status",
+    "domain": "travel",
+    "description": "Check whether a flight is on time."
+  },
+  {
+    "id": "international_visa",
+    "label": "international visa",
+    "domain": "travel",
+    "description": "Ask about visa requirements."
+  },
+  {
+    "id": "lost_luggage",
+    "label": "lost luggage",
+    "domain": "travel",
+    "description": "Report or track lost luggage."
+  },
+  {
+    "id": "plug_type",
+    "label": "plug type",
+    "domain": "travel",
+    "description": "Ask what electrical plug a country uses."
+  },
+  {
+    "id": "exchange_rate",
+    "label": "exchange rate",
+    "domain": "travel",
+    "description": "Ask a currency exchange rate."
+  },
+  {
+    "id": "alarm",
+    "label": "alarm",
+    "domain": "utility",
+    "description": "Set, change, or ask about an alarm."
+  },
+  {
+    "id": "calculator",
+    "label": "calculator",
+    "domain": "utility",
+    "description": "Perform a calculation."
+  },
+  {
+    "id": "date",
+    "label": "date",
+    "domain": "utility",
+    "description": "Ask today's date."
+  },
+  {
+    "id": "definition",
+    "label": "definition",
+    "domain": "utility",
+    "description": "Ask the definition of a word."
+  },
+  {
+    "id": "find_phone",
+    "label": "find phone",
+    "domain": "utility",
+    "description": "Find a lost phone."
+  },
+  {
+    "id": "flip_coin",
+    "label": "flip coin",
+    "domain": "utility",
+    "description": "Flip a coin."
+  },
+  {
+    "id": "make_call",
+    "label": "make call",
+    "domain": "utility",
+    "description": "Place a phone call."
+  },
+  {
+    "id": "measurement_conversion",
+    "label": "measurement conversion",
+    "domain": "utility",
+    "description": "Convert units of measurement."
+  },
+  {
+    "id": "roll_dice",
+    "label": "roll dice",
+    "domain": "utility",
+    "description": "Roll dice."
+  },
+  {
+    "id": "share_location",
+    "label": "share location",
+    "domain": "utility",
+    "description": "Share the user's location."
+  },
+  {
+    "id": "spelling",
+    "label": "spelling",
+    "domain": "utility",
+    "description": "Ask how to spell a word."
+  },
+  {
+    "id": "text",
+    "label": "text",
+    "domain": "utility",
+    "description": "Send a text message."
+  },
+  {
+    "id": "time",
+    "label": "time",
+    "domain": "utility",
+    "description": "Ask the current time."
+  },
+  {
+    "id": "timer",
+    "label": "timer",
+    "domain": "utility",
+    "description": "Set or check a timer."
+  },
+  {
+    "id": "weather",
+    "label": "weather",
+    "domain": "utility",
+    "description": "Ask about the weather."
+  },
+  {
+    "id": "direct_deposit",
+    "label": "direct deposit",
+    "domain": "work",
+    "description": "Ask about or set up direct deposit."
+  },
+  {
+    "id": "pto_request",
+    "label": "pto request",
+    "domain": "work",
+    "description": "Request paid time off."
+  },
+  {
+    "id": "taxes",
+    "label": "taxes",
+    "domain": "work",
+    "description": "Ask a question about taxes."
+  },
+  {
+    "id": "payday",
+    "label": "payday",
+    "domain": "work",
+    "description": "Ask when payday is."
+  },
+  {
+    "id": "w2",
+    "label": "w2",
+    "domain": "work",
+    "description": "Ask about a W-2 form."
+  },
+  {
+    "id": "pto_balance",
+    "label": "pto balance",
+    "domain": "work",
+    "description": "Ask remaining PTO balance."
+  },
+  {
+    "id": "pto_request_status",
+    "label": "pto request status",
+    "domain": "work",
+    "description": "Check the status of a PTO request."
+  },
+  {
+    "id": "next_holiday",
+    "label": "next holiday",
+    "domain": "work",
+    "description": "Ask when the next holiday is."
+  },
+  {
+    "id": "insurance",
+    "label": "insurance",
+    "domain": "work",
+    "description": "Ask about employee insurance coverage."
+  },
+  {
+    "id": "insurance_change",
+    "label": "insurance change",
+    "domain": "work",
+    "description": "Change insurance coverage."
+  },
+  {
+    "id": "schedule_meeting",
+    "label": "schedule meeting",
+    "domain": "work",
+    "description": "Schedule a work meeting."
+  },
+  {
+    "id": "pto_used",
+    "label": "pto used",
+    "domain": "work",
+    "description": "Ask how much PTO has been used."
+  },
+  {
+    "id": "meeting_schedule",
+    "label": "meeting schedule",
+    "domain": "work",
+    "description": "Ask what meetings are scheduled."
+  },
+  {
+    "id": "rollover_401k",
+    "label": "rollover 401k",
+    "domain": "work",
+    "description": "Ask about rolling over a 401k."
+  },
+  {
+    "id": "income",
+    "label": "income",
+    "domain": "work",
+    "description": "Ask about income or salary."
+  },
+  {
+    "id": "are_you_a_bot",
+    "label": "are you a bot",
+    "domain": "small_talk",
+    "description": "Ask whether the assistant is a bot."
+  },
+  {
+    "id": "do_you_have_pets",
+    "label": "do you have pets",
+    "domain": "small_talk",
+    "description": "Ask whether the assistant has pets."
+  },
+  {
+    "id": "fun_fact",
+    "label": "fun fact",
+    "domain": "small_talk",
+    "description": "Ask for a fun fact."
+  },
+  {
+    "id": "goodbye",
+    "label": "goodbye",
+    "domain": "small_talk",
+    "description": "End the conversation."
+  },
+  {
+    "id": "greeting",
+    "label": "greeting",
+    "domain": "small_talk",
+    "description": "Say hello or greet the assistant."
+  },
+  {
+    "id": "how_old_are_you",
+    "label": "how old are you",
+    "domain": "small_talk",
+    "description": "Ask the assistant's age."
+  },
+  {
+    "id": "meaning_of_life",
+    "label": "meaning of life",
+    "domain": "small_talk",
+    "description": "Ask about the meaning of life."
+  },
+  {
+    "id": "tell_joke",
+    "label": "tell joke",
+    "domain": "small_talk",
+    "description": "Ask the assistant to tell a joke."
+  },
+  {
+    "id": "thank_you",
+    "label": "thank you",
+    "domain": "small_talk",
+    "description": "Thank the assistant."
+  },
+  {
+    "id": "what_are_your_hobbies",
+    "label": "what are your hobbies",
+    "domain": "small_talk",
+    "description": "Ask about the assistant's hobbies."
+  },
+  {
+    "id": "what_can_i_ask_you",
+    "label": "what can i ask you",
+    "domain": "small_talk",
+    "description": "Ask what the assistant can do."
+  },
+  {
+    "id": "what_is_your_name",
+    "label": "what is your name",
+    "domain": "small_talk",
+    "description": "Ask the assistant's name."
+  },
+  {
+    "id": "where_are_you_from",
+    "label": "where are you from",
+    "domain": "small_talk",
+    "description": "Ask where the assistant is from."
+  },
+  {
+    "id": "who_do_you_work_for",
+    "label": "who do you work for",
+    "domain": "small_talk",
+    "description": "Ask who the assistant works for."
+  },
+  {
+    "id": "who_made_you",
+    "label": "who made you",
+    "domain": "small_talk",
+    "description": "Ask who created the assistant."
+  },
+  {
+    "id": "cancel",
+    "label": "cancel",
+    "domain": "meta",
+    "description": "Cancel the current action or request."
+  },
+  {
+    "id": "change_accent",
+    "label": "change accent",
+    "domain": "meta",
+    "description": "Change the assistant's speaking accent."
+  },
+  {
+    "id": "change_ai_name",
+    "label": "change ai name",
+    "domain": "meta",
+    "description": "Rename the assistant."
+  },
+  {
+    "id": "change_language",
+    "label": "change language",
+    "domain": "meta",
+    "description": "Change the assistant's language."
+  },
+  {
+    "id": "change_speed",
+    "label": "change speed",
+    "domain": "meta",
+    "description": "Change how fast the assistant speaks."
+  },
+  {
+    "id": "change_user_name",
+    "label": "change user name",
+    "domain": "meta",
+    "description": "Change the name the assistant uses for the user."
+  },
+  {
+    "id": "change_volume",
+    "label": "change volume",
+    "domain": "meta",
+    "description": "Change the assistant's volume."
+  },
+  {
+    "id": "maybe",
+    "label": "maybe",
+    "domain": "meta",
+    "description": "Give an uncertain or maybe response."
+  },
+  {
+    "id": "no",
+    "label": "no",
+    "domain": "meta",
+    "description": "Answer no or decline."
+  },
+  {
+    "id": "repeat",
+    "label": "repeat",
+    "domain": "meta",
+    "description": "Ask the assistant to repeat itself."
+  },
+  {
+    "id": "reset_settings",
+    "label": "reset settings",
+    "domain": "meta",
+    "description": "Reset assistant settings to defaults."
+  },
+  {
+    "id": "sync_device",
+    "label": "sync device",
+    "domain": "meta",
+    "description": "Sync or connect a device."
+  },
+  {
+    "id": "user_name",
+    "label": "user name",
+    "domain": "meta",
+    "description": "Ask what name the assistant has for the user."
+  },
+  {
+    "id": "whisper_mode",
+    "label": "whisper mode",
+    "domain": "meta",
+    "description": "Turn whisper or quiet mode on or off."
+  },
+  {
+    "id": "yes",
+    "label": "yes",
+    "domain": "meta",
+    "description": "Answer yes or confirm."
+  }
+]
