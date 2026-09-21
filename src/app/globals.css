@@ -13,9 +13,8 @@ body {
 }
 
 body {
-  background:
-    radial-gradient(1200px 500px at 10% -10%, rgba(255, 255, 255, 0.7), transparent 50%),
-    #f3efe4;
+  background: #f3efe4;
+  letter-spacing: -0.006em;
 }
 
 ::selection {
@@ -23,20 +22,37 @@ body {
   color: #f3efe4;
 }
 
-.field {
-  height: 2.75rem;
-  width: 8rem;
-  border-radius: 0.75rem;
-  border: 1px solid #d8d1c2;
-  background: #fffdf7;
-  padding: 0 0.75rem;
-  font-size: 0.875rem;
+@layer components {
+  /* Uppercase micro-label. Uppercase needs tracking or it reads as cramped. */
+  .label {
+    @apply font-sans text-micro uppercase tracking-label text-mute;
+  }
+
+  .num {
+    @apply font-mono tabular-nums;
+  }
+
+  .field {
+    @apply h-11 w-32 border border-rule bg-card px-3 text-sm text-ink outline-none;
+    border-radius: 0;
+  }
+
+  .field:focus-visible {
+    @apply ring-2 ring-ink/15;
+  }
+
+  .btn-primary {
+    @apply h-11 border border-ink bg-ink px-5 text-sm text-paper disabled:opacity-40;
+  }
+
+  .btn-secondary {
+    @apply h-11 border border-rule bg-card px-5 text-sm text-ink hover:border-ink/40;
+  }
 }
 
 .run-select-trigger {
   max-width: 100%;
   font: inherit;
-  font-weight: 500;
   line-height: inherit;
   color: inherit;
   background: transparent;
@@ -55,25 +71,29 @@ body {
   z-index: 40;
   min-width: 12rem;
   margin: 0;
-  padding: 0.3rem;
+  padding: 0;
   list-style: none;
   border: 1px solid #d8d1c2;
-  border-radius: 0.75rem;
+  border-radius: 0;
   background: #fffdf7;
-  box-shadow: 0 1px 0 rgba(27, 25, 20, 0.04), 0 12px 32px rgba(27, 25, 20, 0.08);
-  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   font-size: 0.875rem;
   font-weight: 400;
+  letter-spacing: normal;
   line-height: 1.35;
+}
+
+.run-select-menu li + li button {
+  border-top: 1px solid #ece6d9;
 }
 
 .run-select-menu button {
   display: block;
   width: 100%;
   border: 0;
-  border-radius: 0.5rem;
+  border-radius: 0;
   background: transparent;
-  padding: 0.45rem 0.7rem;
+  padding: 0.5rem 0.8rem;
   text-align: left;
   color: #1b1914;
   cursor: pointer;

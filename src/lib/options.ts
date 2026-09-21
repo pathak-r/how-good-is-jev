@@ -1,7 +1,7 @@
 export const DATASET_IDS = ["clinc150", "banking77", "hwu64"] as const;
 export type DatasetId = (typeof DATASET_IDS)[number];
 
-export const LLM_MODEL_IDS = ["gpt-4.1", "gpt-4.1-mini", "gpt-5.6-sol"] as const;
+export const LLM_MODEL_IDS = ["gpt-4.1", "gpt-4.1-mini", "gpt-5.6-sol", "gpt-5.6-terra"] as const;
 export type LlmModelId = (typeof LLM_MODEL_IDS)[number];
 
 export const DATASET_OPTIONS = [
@@ -49,6 +49,14 @@ export const LLM_MODEL_OPTIONS = [
     reasoningEffort: "none" as const,
     inputPerMtok: 4,
     outputPerMtok: 20,
+  },
+  {
+    id: "gpt-5.6-terra",
+    label: "GPT-5.6 Terra",
+    temperature: null,
+    reasoningEffort: "none" as const,
+    inputPerMtok: 2,
+    outputPerMtok: 12,
   },
 ] as const;
 

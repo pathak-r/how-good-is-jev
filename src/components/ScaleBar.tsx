@@ -1,18 +1,25 @@
 export function ScaleBar({
   value,
   max,
-  label,
+  name,
+  display,
 }: {
   value: number;
   max: number;
-  label?: string;
+  name?: string;
+  display?: string;
 }) {
-  const width = max > 0 ? Math.max(4, Math.min(100, (value / max) * 100)) : 0;
+  const width = max > 0 ? Math.max(2, Math.min(100, (value / max) * 100)) : 0;
   return (
     <div>
-      {label ? <p className="mb-1 font-mono text-[11px] text-mute">{label}</p> : null}
-      <div className="h-2 overflow-hidden rounded-full bg-rule">
-        <div className="h-full rounded-full bg-ink" style={{ width: `${width}%` }} />
+      {name ? (
+        <div className="mb-1.5 flex items-baseline justify-between gap-3 text-micro">
+          <span className="text-mute">{name}</span>
+          <span className="num">{display}</span>
+        </div>
+      ) : null}
+      <div className="h-1.5 bg-rule">
+        <div className="h-full bg-ink" style={{ width: `${width}%` }} />
       </div>
     </div>
   );

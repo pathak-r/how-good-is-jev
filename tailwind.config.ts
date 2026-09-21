@@ -15,24 +15,33 @@ const config: Config = {
         warn: "#8a5a12",
       },
       fontFamily: {
-        display: [
-          "ui-sans-serif",
-          "system-ui",
-          "-apple-system",
-          "Segoe UI",
-          "sans-serif",
-        ],
+        display: ["var(--font-display)", "Iowan Old Style", "Georgia", "serif"],
         sans: [
+          "var(--font-sans)",
           "ui-sans-serif",
           "system-ui",
           "-apple-system",
           "Segoe UI",
           "sans-serif",
         ],
-        mono: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
+        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
       },
-      boxShadow: {
-        card: "0 1px 0 rgba(27,25,20,0.04), 0 12px 32px rgba(27,25,20,0.06)",
+      fontSize: {
+        micro: ["0.6875rem", { lineHeight: "1rem" }],
+        xs: ["0.8125rem", { lineHeight: "1.25rem" }],
+        sm: ["0.875rem", { lineHeight: "1.5rem" }],
+        base: ["1rem", { lineHeight: "1.65rem" }],
+        lg: ["1.5rem", { lineHeight: "1.9rem" }],
+        xl: ["2rem", { lineHeight: "2.3rem" }],
+        "2xl": ["2.5rem", { lineHeight: "2.8rem" }],
+      },
+      letterSpacing: {
+        label: "0.1em",
+      },
+      maxWidth: {
+        measure: "36rem",
+        wide: "60rem",
+        headline: "46rem",
       },
     },
   },

@@ -41,7 +41,7 @@ export function BenchmarkLab() {
 
   return (
     <div>
-      <p className="text-xs uppercase text-mute">Benchmark mode</p>
+      <p className="label">Benchmark mode</p>
       <RunConfigBar
         llmModel={llmModel}
         datasetId={datasetId}
@@ -54,14 +54,14 @@ export function BenchmarkLab() {
           setResult(null);
         }}
       />
-      <p className="mt-4 text-sm leading-6 text-mute">
+      <p className="mt-4 max-w-wide text-base text-mute">
         Both models get the same held-out {dataset.label} sample. We score exact intent match.
         We do not pick a winner.
       </p>
 
-      <div className="mt-8 flex flex-wrap items-end gap-4">
+      <div className="mt-10 flex flex-wrap items-end gap-4">
         <label className="text-sm">
-          <span className="mb-1 block text-mute">Sample size</span>
+          <span className="label mb-2 block">Sample size</span>
           <select
             value={size}
             onChange={(event) => setSize(Number(event.target.value) as (typeof SIZES)[number])}
@@ -74,12 +74,7 @@ export function BenchmarkLab() {
             ))}
           </select>
         </label>
-        <button
-          type="button"
-          onClick={() => void run()}
-          disabled={pending}
-          className="h-11 rounded-full bg-ink px-5 text-sm text-paper disabled:opacity-40"
-        >
+        <button type="button" onClick={() => void run()} disabled={pending} className="btn-primary">
           {pending ? "Running sample…" : "Run benchmark"}
         </button>
       </div>
@@ -87,7 +82,7 @@ export function BenchmarkLab() {
       <details className="mt-4 text-sm">
         <summary className="cursor-pointer text-mute">Advanced</summary>
         <label className="mt-3 block">
-          <span className="mb-1 block text-mute">Seed</span>
+          <span className="label mb-2 block">Seed</span>
           <input
             type="number"
             value={seed}
@@ -111,44 +106,50 @@ function BenchmarkResults({ result }: { result: BenchmarkMetrics }) {
   const maxLatency = Math.max(result.llm.averageLatencyMs, result.jev.averageLatencyMs, 1);
   const maxCost = Math.max(result.llm.estimatedCostUsd, result.jev.estimatedCostUsd, 0);
 
+  const llmLabel = result.llmModelLabel ?? "LLM";
+
   return (
-    <div className="mt-10 space-y-8">
-      <section className="rounded-2xl border border-rule bg-card p-5 shadow-card">
-        <p className="text-sm font-medium">
+    <div className="mt-10 space-y-10">
+      <section>
+        <p className="max-w-measure font-display text-lg leading-snug">
           {formatRelativeSaving(result.llm.estimatedCostUsd, result.jev.estimatedCostUsd, "cost")}
-          {" · "}
+          {". "}
           {formatRelativeSaving(result.llm.averageLatencyMs, result.jev.averageLatencyMs, "latency")}
+          {"."}
         </p>
-        <p className="mt-2 font-mono text-xs text-mute">
-          Disagreement rate {formatPct(result.disagreementRate)} · dataset {result.datasetVersion} ·
-          seed {result.seed}
-        </p>
-        <div className="mt-5 grid gap-5 sm:grid-cols-3">
+        <div className="mt-4 grid grid-cols-1 divide-y divide-rule border border-rule bg-card sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           <MetricPair
             label="Exact-intent accuracy"
-            left={`${result.llmModelLabel ?? "LLM"}  ${formatPct(result.llm.routingAccuracy)}`}
-            right={`Jev  ${formatPct(result.jev.routingAccuracy)}`}
+            llmLabel={llmLabel}
+            left={formatPct(result.llm.routingAccuracy)}
+            right={formatPct(result.jev.routingAccuracy)}
             leftValue={result.llm.routingAccuracy}
             rightValue={result.jev.routingAccuracy}
             max={1}
           />
           <MetricPair
             label="Average latency"
-            left={`${result.llmModelLabel ?? "LLM"}  ${formatMs(result.llm.averageLatencyMs)}`}
-            right={`Jev  ${formatMs(result.jev.averageLatencyMs)}`}
+            llmLabel={llmLabel}
+            left={formatMs(result.llm.averageLatencyMs)}
+            right={formatMs(result.jev.averageLatencyMs)}
             leftValue={result.llm.averageLatencyMs}
             rightValue={result.jev.averageLatencyMs}
             max={maxLatency}
           />
           <MetricPair
             label="Estimated cost"
-            left={`${result.llmModelLabel ?? "LLM"}  ${formatUsd(result.llm.estimatedCostUsd)}`}
-            right={`Jev  ${formatUsd(result.jev.estimatedCostUsd)}`}
+            llmLabel={llmLabel}
+            left={formatUsd(result.llm.estimatedCostUsd)}
+            right={formatUsd(result.jev.estimatedCostUsd)}
             leftValue={result.llm.estimatedCostUsd}
             rightValue={result.jev.estimatedCostUsd}
             max={maxCost}
           />
         </div>
+        <p className="num mt-2 text-xs text-mute">
+          Disagreement rate {formatPct(result.disagreementRate)} · dataset {result.datasetVersion} ·
+          seed {result.seed}
+        </p>
       </section>
 
       <div className="grid gap-4 md:grid-cols-2">
@@ -160,25 +161,25 @@ function BenchmarkResults({ result }: { result: BenchmarkMetrics }) {
 
       {result.disagreements.length ? (
         <div>
-          <h2 className="font-display text-2xl font-medium">Disagreements</h2>
+          <h2 className="font-display text-lg leading-tight">Disagreements</h2>
           <p className="mt-1 text-sm text-mute">Cases where the two routes differ.</p>
-          <div className="mt-4 overflow-x-auto rounded-2xl border border-rule bg-card">
+          <div className="mt-4 overflow-x-auto border border-rule bg-card">
             <table className="min-w-full text-left text-sm">
-              <thead className="border-b border-rule font-mono text-xs text-mute">
-                <tr>
-                  <th className="px-4 py-3">Utterance</th>
-                  <th className="px-4 py-3">Gold</th>
-                  <th className="px-4 py-3">LLM</th>
-                  <th className="px-4 py-3">Jev</th>
+              <thead>
+                <tr className="border-b border-rule">
+                  <th className="label px-4 py-3 font-normal">Utterance</th>
+                  <th className="label px-4 py-3 font-normal">Gold</th>
+                  <th className="label px-4 py-3 font-normal">LLM</th>
+                  <th className="label px-4 py-3 font-normal">Jev</th>
                 </tr>
               </thead>
               <tbody>
                 {result.disagreements.slice(0, 25).map((row) => (
-                  <tr key={row.id} className="border-t border-rule/70">
+                  <tr key={row.id} className="border-t border-rule">
                     <td className="max-w-sm px-4 py-3">{row.utterance}</td>
-                    <td className="px-4 py-3 font-mono text-xs">{row.intent}</td>
-                    <td className="px-4 py-3 font-mono text-xs">{row.llm.route ?? "fail"}</td>
-                    <td className="px-4 py-3 font-mono text-xs">{row.jev.route ?? "fail"}</td>
+                    <td className="num px-4 py-3 text-xs">{row.intent}</td>
+                    <td className="num px-4 py-3 text-xs">{row.llm.route ?? "fail"}</td>
+                    <td className="num px-4 py-3 text-xs">{row.jev.route ?? "fail"}</td>
                   </tr>
                 ))}
               </tbody>
@@ -192,6 +193,7 @@ function BenchmarkResults({ result }: { result: BenchmarkMetrics }) {
 
 function MetricPair({
   label,
+  llmLabel,
   left,
   right,
   leftValue,
@@ -199,6 +201,7 @@ function MetricPair({
   max,
 }: {
   label: string;
+  llmLabel: string;
   left: string;
   right: string;
   leftValue: number;
@@ -206,11 +209,11 @@ function MetricPair({
   max: number;
 }) {
   return (
-    <div>
-      <p className="mb-2 text-xs text-mute">{label}</p>
-      <div className="space-y-2">
-        <ScaleBar label={left} value={leftValue} max={max} />
-        <ScaleBar label={right} value={rightValue} max={max} />
+    <div className="px-4 py-4 sm:px-5">
+      <p className="label">{label}</p>
+      <div className="mt-3 space-y-3">
+        <ScaleBar name={llmLabel} display={left} value={leftValue} max={max} />
+        <ScaleBar name="Jev" display={right} value={rightValue} max={max} />
       </div>
     </div>
   );
@@ -232,13 +235,13 @@ function MetricsTable({
     ["Failed calls", String(metrics.failed)],
   ];
   return (
-    <section className="rounded-2xl border border-rule bg-card p-5 shadow-card">
-      <h2 className="font-display text-2xl font-medium">{title}</h2>
-      <dl className="mt-4 space-y-2 font-mono text-sm">
+    <section className="border border-rule bg-card">
+      <h2 className="border-b border-rule px-5 py-3 font-display text-lg leading-none">{title}</h2>
+      <dl className="divide-y divide-rule">
         {rows.map(([label, value]) => (
-          <div key={label} className="flex justify-between gap-4">
-            <dt className="text-mute">{label}</dt>
-            <dd>{value}</dd>
+          <div key={label} className="flex items-baseline justify-between gap-4 px-5 py-2.5">
+            <dt className="text-sm text-mute">{label}</dt>
+            <dd className="num text-sm">{value}</dd>
           </div>
         ))}
       </dl>
@@ -253,16 +256,16 @@ function DomainChart({
 }) {
   return (
     <section>
-      <h2 className="font-display text-2xl font-medium">Accuracy by domain</h2>
+      <h2 className="font-display text-lg leading-tight">Accuracy by domain</h2>
       <p className="mt-1 text-sm text-mute">Diagnostic only. Primary score remains exact intent match.</p>
       <div className="mt-4 space-y-3">
         {rows.map((row) => (
           <div key={row.domain}>
-            <div className="mb-1 flex justify-between font-mono text-xs text-mute">
-              <span>
+            <div className="mb-1.5 flex justify-between gap-4 text-micro">
+              <span className="text-mute">
                 {row.domain.replaceAll("_", " ")} ({row.count})
               </span>
-              <span>
+              <span className="num">
                 LLM {formatPct(row.llmAccuracy)} · Jev {formatPct(row.jevAccuracy)}
               </span>
             </div>

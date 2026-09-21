@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { CompareMetrics, theyAgree } from "./CompareSummary";
-import { ResultCard } from "./ResultCard";
+import { VerdictStrip } from "./CompareSummary";
+import { CompareTable } from "./CompareTable";
 import { RunConfigBar } from "./RunConfigBar";
 import { TracePanel } from "./TracePanel";
 import { useRunConfig } from "@/hooks/useRunConfig";
@@ -64,44 +64,48 @@ export function CompareLab() {
 
   return (
     <div>
-      <div>
-        <p className="text-xs uppercase text-mute">Compare mode</p>
-        <RunConfigBar
-          llmModel={llmModel}
-          datasetId={datasetId}
-          onLlmModel={(id) => {
-            setLlmModel(id);
-            setResult(null);
+      <p className="label">Compare mode</p>
+      <RunConfigBar
+        llmModel={llmModel}
+        datasetId={datasetId}
+        onLlmModel={(id) => {
+          setLlmModel(id);
+          setResult(null);
+          setNotice(null);
+        }}
+        onDatasetId={(id) => {
+          if (id === datasetId) return;
+          setDatasetId(id);
+          setResult(null);
+          if (exampleId) {
+            void loadExample(id, `Loaded a new ${datasetOption(id).label} example.`);
+          } else {
             setNotice(null);
-          }}
-          onDatasetId={(id) => {
-            if (id === datasetId) return;
-            setDatasetId(id);
-            setResult(null);
-            if (exampleId) {
-              void loadExample(id, `Loaded a new ${datasetOption(id).label} example.`);
-            } else {
-              setNotice(null);
-            }
-          }}
-        />
-        <p className="mt-4 text-sm leading-6 text-mute">
-          Each model reads an utterance from the chosen dataset and must pick one of {intentCount}{" "}
-          labeled intents. Ground truth is shown when both calls finish. Traces, latency, and a cost
-          comparison are also shown.
-        </p>
-      </div>
+          }
+        }}
+      />
+      <p className="mt-4 max-w-wide text-base text-mute">
+        Each router reads the same request and must pick one of {intentCount} labeled intents. When
+        the request comes from the dataset, the gold label is shown once both calls finish.
+      </p>
 
       <form
-        className="mt-8"
+        className="mt-10"
         onSubmit={(event) => {
           event.preventDefault();
           void run(exampleId ? { exampleId } : { utterance });
         }}
       >
-        <label htmlFor="utterance" className="sr-only">
-          User request
-        </label>
+        <div className="flex items-baseline justify-between gap-4">
+          <label htmlFor="utterance" className="label">
+            User request
+          </label>
+          {exampleId ? (
+            <p className="num text-micro text-mute">
+              {dataset.label} · {exampleId}
+            </p>
+          ) : null}
+        </div>
         <textarea
           id="utterance"
           value={utterance}
@@ -110,24 +114,16 @@ export function CompareLab() {
             setExampleId(null);
             setNotice(null);
           }}
-          rows={3}
+          rows={2}
           placeholder="My card still has not arrived."
-          className="w-full resize-none rounded-2xl border border-rule bg-card px-4 py-3 text-base outline-none ring-ink/10 focus:ring-2"
+          className="mt-2 w-full resize-none border border-rule bg-card px-4 py-3 text-base outline-none focus:ring-2 focus:ring-ink/15"
         />
         <div className="mt-3 flex flex-wrap gap-3">
-          <button
-            type="submit"
-            disabled={pending || !utterance.trim()}
-            className="rounded-full bg-ink px-5 py-2 text-sm text-paper disabled:opacity-40"
-          >
+          <button type="submit" disabled={pending || !utterance.trim()} className="btn-primary">
             {pending ? "Running…" : "Run comparison"}
           </button>
-          <button
-            type="button"
-            onClick={() => void loadExample()}
-            className="rounded-full border border-rule bg-card px-5 py-2 text-sm"
-          >
-            Try a dataset example from {dataset.label}
+          <button type="button" onClick={() => void loadExample()} className="btn-secondary">
+            Try an example
           </button>
         </div>
       </form>
@@ -135,74 +131,43 @@ export function CompareLab() {
       {notice ? <p className="mt-3 text-sm text-mute">{notice}</p> : null}
       {error ? <p className="mt-3 text-sm text-bad">{error}</p> : null}
 
-      <div className="mt-8 grid items-start gap-4 md:grid-cols-2">
-        <div className="flex min-w-0 flex-col overflow-hidden rounded-2xl border border-rule bg-card shadow-card">
-          <ResultCard
-            title="Traditional LLM router"
-            subtitle={`${result?.llmModelLabel ?? llmModelOption(llmModel).label} structured output`}
-            result={result?.llm ?? null}
-            goldIntent={result?.groundTruth?.intent}
-            openComparison={result?.openComparison}
-            pending={pending}
-            hasTrace={Boolean(result?.traces.llm)}
-            traceOpen={openTrace.llm}
-            onToggleTrace={() => setOpenTrace((current) => ({ ...current, llm: !current.llm }))}
-            intentCount={intentCount}
-            embedded
+      <div className="mt-10">
+        <CompareTable
+          llmTitle="Traditional LLM router"
+          llmSubtitle={`${result?.llmModelLabel ?? llmModelOption(llmModel).label} structured output`}
+          result={result}
+          pending={pending}
+          intentCount={intentCount}
+          traceOpen={openTrace}
+          onToggleTrace={(lane) =>
+            setOpenTrace((current) => ({ ...current, [lane]: !current[lane] }))
+          }
+        />
+
+        {result ? (
+          <VerdictStrip
+            llm={result.llm}
+            jev={result.jev}
+            groundTruth={result.groundTruth}
+            openComparison={result.openComparison}
           />
-        </div>
-        <div className="flex min-w-0 flex-col overflow-hidden rounded-2xl border border-rule bg-card shadow-card">
-          <ResultCard
-            title="Jev router"
-            subtitle="TypeSafe System One"
-            result={result?.jev ?? null}
-            goldIntent={result?.groundTruth?.intent}
-            openComparison={result?.openComparison}
-            pending={pending}
-            hasTrace={Boolean(result?.traces.jev)}
-            traceOpen={openTrace.jev}
-            onToggleTrace={() => setOpenTrace((current) => ({ ...current, jev: !current.jev }))}
-            intentCount={intentCount}
-            embedded
-          />
-        </div>
+        ) : null}
+
+        {showTraces ? (
+          <div className="mt-4 grid items-start gap-4 md:grid-cols-2">
+            {openTrace.llm ? (
+              <TracePanel title="Traditional LLM trace" trace={result?.traces.llm ?? null} />
+            ) : (
+              <div />
+            )}
+            {openTrace.jev ? (
+              <TracePanel title="Jev trace" trace={result?.traces.jev ?? null} />
+            ) : (
+              <div />
+            )}
+          </div>
+        ) : null}
       </div>
-
-      {result ? (
-        <CompareMetrics llm={result.llm} jev={result.jev} llmLabel={result.llmModelLabel} />
-      ) : null}
-
-      {showTraces ? (
-        <div className="mt-4 grid items-start gap-4 md:grid-cols-2">
-          {openTrace.llm ? (
-            <TracePanel title="Traditional LLM trace" trace={result?.traces.llm ?? null} />
-          ) : (
-            <div />
-          )}
-          {openTrace.jev ? (
-            <TracePanel title="Jev trace" trace={result?.traces.jev ?? null} />
-          ) : (
-            <div />
-          )}
-        </div>
-      ) : null}
-
-      {result ? (
-        <div className="mt-4 rounded-2xl border border-dashed border-rule bg-card/70 px-5 py-4 text-center">
-          <p className="text-sm font-medium">{theyAgree(result.llm, result.jev) ? "They agree" : "They disagree"}</p>
-          {result.groundTruth ? (
-            <>
-              <p className="mt-3 text-xs uppercase text-mute">Ground truth</p>
-              <p className="mt-2 font-display text-2xl font-medium">{result.groundTruth.label}</p>
-              <p className="mt-1 font-mono text-xs text-mute">
-                {result.groundTruth.domain} / {result.groundTruth.intent}
-              </p>
-            </>
-          ) : (
-            <p className="mt-2 text-sm text-mute">Open comparison — no official label for typed-in text.</p>
-          )}
-        </div>
-      ) : null}
     </div>
   );
 }

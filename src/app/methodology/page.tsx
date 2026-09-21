@@ -1,52 +1,140 @@
+import Link from "next/link";
 import { CANONICAL_INTENTS } from "@/lib/intents";
 
 export default function MethodologyPage() {
   return (
     <article>
-      <p className="text-xs uppercase text-mute">Methodology</p>
-      <h1 className="mt-3 font-display text-4xl font-medium">What this lab measures</h1>
-      <div className="mt-6 space-y-5 text-sm leading-7">
-        <p>
-          Primary task: exact intent routing on the dataset you pick. CLINC150 is 150-way and
-          multi-domain. BANKING77 is 77-way banking. HWU64 is 64-way home assistant. Right domain,
-          wrong intent still counts as wrong.
+      <p className="label">Methodology</p>
+      <h1 className="mt-3 max-w-headline font-display text-xl leading-tight sm:text-2xl">
+        What this lab measures
+      </h1>
+      <p className="mt-5 max-w-measure text-base">
+        Exact intent routing on the dataset you pick. Right domain, wrong intent still counts as
+        wrong.
+      </p>
+
+      <div className="mt-10 max-w-measure space-y-8">
+        <Group title="Task and data">
+          <Item>
+            Datasets: CLINC150 ({CANONICAL_INTENTS.length} intents, multi-domain), BANKING77 (77,
+            banking), HWU64 (64, home assistant).
+          </Item>
+          <Item>Headline split: held-out test only. Training data is not scored.</Item>
+          <Item>
+            Allowed destinations: the selected dataset’s canonical intent identifiers, identical for
+            both systems.
+          </Item>
+        </Group>
+
+        <Group title="Systems">
+          <Item>
+            LLM: GPT-4.1 or GPT-4.1 mini with structured outputs and temperature 0. GPT-5.6 Sol or
+            GPT-5.6 Terra with structured outputs and reasoning effort none (temperature is not
+            sent).
+          </Item>
+          <Item>Jev: TypeSafe System One Choice over the same label set.</Item>
+        </Group>
+
+        <Group title="Measurement">
+          <Item>Latency: server-side duration of each provider call, not total page time.</Item>
+          <Item>
+            Cost: token usage × that model’s USD / 1M token prices, reported as a percentage
+            difference against the chosen LLM on the observed run.
+          </Item>
+          <Item>
+            Jev confidence: below 50% routes to a human, 50% or higher auto-routes. A demo rule, not
+            a Jev default.
+          </Item>
+          <Item>Failures: timeouts, schema errors, and provider errors stay in the denominator.</Item>
+          <Item>Runs with different models or datasets are not comparable to each other.</Item>
+        </Group>
+
+        <Group title="Pricing, as of 20 Sep 2026">
+          <table className="w-full border border-rule bg-card text-left">
+            <thead>
+              <tr className="border-b border-rule">
+                <th className="label px-4 py-2.5 font-normal">Model</th>
+                <th className="label px-4 py-2.5 text-right font-normal">Input</th>
+                <th className="label px-4 py-2.5 text-right font-normal">Output</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-rule">
+              {PRICES.map((row) => (
+                <tr key={row.model}>
+                  <td className="px-4 py-2.5 text-sm">{row.model}</td>
+                  <td className="num px-4 py-2.5 text-right text-sm">{row.input}</td>
+                  <td className="num px-4 py-2.5 text-right text-sm">{row.output}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="mt-2 text-xs text-mute">USD per 1M tokens.</p>
+        </Group>
+
+        <Group title="Sources and licenses">
+          <Item>
+            CLINC150 — CC BY 3.0,{" "}
+            <Source href="https://github.com/clinc/oos-eval">clinc/oos-eval</Source>. Citation:
+            Larson et al., EMNLP 2019.
+          </Item>
+          <Item>
+            BANKING77 — CC BY 4.0,{" "}
+            <Source href="https://github.com/PolyAI-LDN/task-specific-datasets">
+              PolyAI-LDN/task-specific-datasets
+            </Source>
+            .
+          </Item>
+          <Item>
+            HWU64 — CC BY-SA 3.0,{" "}
+            <Source href="https://github.com/xliuhw/NLU-Evaluation-Data">
+              xliuhw/NLU-Evaluation-Data
+            </Source>
+            , standard 64-intent held-out split.
+          </Item>
+        </Group>
+
+        <p className="text-base">
+          This is a router benchmark, not a claim that one architecture is universally better.
         </p>
-        <ul className="list-disc space-y-2 pl-5">
-          <li>Datasets: CLINC150 ({CANONICAL_INTENTS.length} intents), BANKING77 (77), HWU64 (64).</li>
-          <li>Headline split: held-out test only. Training data is not scored.</li>
-          <li>Allowed destinations: the selected dataset’s canonical intent identifiers, identical for both systems.</li>
-          <li>
-            LLM: GPT-4.1 or GPT-4.1 mini with structured outputs and temperature 0. GPT-5.6 Sol with
-            structured outputs and reasoning effort none (temperature is not sent).
-          </li>
-          <li>Jev: TypeSafe System One Choice over the same label set.</li>
-          <li>Latency: server-side duration of each provider call, not total page time.</li>
-          <li>
-            Cost: token usage × that model’s USD / 1M token prices. We report Jev as “x% lower” or
-            “x% higher” vs the chosen LLM on the observed run. Pricing as of 20 Sep 2026. GPT-4.1
-            $2 / $8, GPT-4.1 mini $0.40 / $1.60, GPT-5.6 Sol $4 / $20, Jev $0.042 / $0.
-          </li>
-          <li>Jev confidence: below 50% routes to a human; 50% or higher auto-routes to the chosen intent. That cutoff is a demo rule, not a Jev default.</li>
-          <li>Failures: timeouts, schema errors, and provider errors stay in the denominator.</li>
-          <li>Runs with different models or datasets are not comparable to each other.</li>
-        </ul>
-        <p>
-          CLINC150 is licensed under Creative Commons Attribution 3.0. Source:{" "}
-          <a className="underline" href="https://github.com/clinc/oos-eval">
-            clinc/oos-eval
-          </a>
-          . Citation: Larson et al., EMNLP 2019. BANKING77 is CC BY 4.0 from{" "}
-          <a className="underline" href="https://github.com/PolyAI-LDN/task-specific-datasets">
-            PolyAI-LDN/task-specific-datasets
-          </a>
-          . HWU64 is CC BY-SA 3.0 from{" "}
-          <a className="underline" href="https://github.com/xliuhw/NLU-Evaluation-Data">
-            xliuhw/NLU-Evaluation-Data
-          </a>
-          , using the standard 64-intent held-out split.
-        </p>
-        <p>This is a router benchmark, not a claim that one architecture is universally better.</p>
       </div>
+
+      <nav className="mt-10 flex flex-wrap gap-x-6 gap-y-2 border-t border-rule pt-5 text-sm">
+        <Link href="/" className="underline underline-offset-4 hover:text-ink">
+          Run a comparison
+        </Link>
+        <Link href="/how-it-works" className="underline underline-offset-4 hover:text-ink">
+          How the two lanes differ
+        </Link>
+      </nav>
     </article>
+  );
+}
+
+const PRICES = [
+  { model: "GPT-4.1", input: "$2", output: "$8" },
+  { model: "GPT-4.1 mini", input: "$0.40", output: "$1.60" },
+  { model: "GPT-5.6 Sol", input: "$4", output: "$20" },
+  { model: "GPT-5.6 Terra", input: "$2", output: "$12" },
+  { model: "Jev", input: "$0.042", output: "$0" },
+];
+
+function Group({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <section>
+      <h2 className="label border-b border-rule pb-2">{title}</h2>
+      <div className="mt-4 space-y-3">{children}</div>
+    </section>
+  );
+}
+
+function Item({ children }: { children: React.ReactNode }) {
+  return <p className="text-base">{children}</p>;
+}
+
+function Source({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <a className="underline underline-offset-4" href={href}>
+      {children}
+    </a>
   );
 }

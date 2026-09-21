@@ -1,6 +1,6 @@
 # How good is Jev?
 
-Public comparison lab: TypeSafe Jev vs a structured-output LLM on the same intent set. Pick CLINC150, BANKING77, or HWU64, and GPT-4.1, GPT-4.1 mini, or GPT-5.6 Sol.
+Public comparison lab: TypeSafe Jev vs a structured-output LLM on the same intent set. Pick CLINC150, BANKING77, or HWU64, and GPT-4.1, GPT-4.1 mini, GPT-5.6 Sol, or GPT-5.6 Terra.
 
 ## Local setup
 

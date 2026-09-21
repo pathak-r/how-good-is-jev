@@ -8,10 +8,10 @@ export function TracePanel({
   trace: SafeLlmTrace | SafeJevTrace | null;
 }) {
   return (
-    <section className="min-w-0 rounded-2xl border border-rule bg-card p-4">
-      <p className="mb-2 text-xs uppercase text-mute">{title}</p>
+    <section className="min-w-0 border border-rule bg-card p-4">
+      <p className="label mb-2">{title}</p>
       {trace ? (
-        <pre className="max-h-56 overflow-auto whitespace-pre-wrap break-all rounded-lg bg-ink px-3 py-3 font-mono text-[11px] leading-5 text-paper">
+        <pre className="max-h-56 overflow-auto whitespace-pre-wrap break-all bg-ink px-3 py-3 font-mono text-micro leading-5 text-paper">
           {JSON.stringify(trace, null, 2)}
         </pre>
       ) : (

@@ -18,7 +18,7 @@ export function RunConfigBar({
   const [openMenu, setOpenMenu] = useState<"llm" | "dataset" | null>(null);
 
   return (
-    <h1 className="mt-3 font-display text-3xl font-medium leading-tight sm:text-4xl">
+    <h1 className="mt-3 font-display text-xl leading-tight sm:text-2xl">
       Compare Jev with{" "}
       <SentenceMenu
         label="LLM to compare with"
@@ -28,15 +28,18 @@ export function RunConfigBar({
         open={openMenu === "llm"}
         onOpenChange={(open) => setOpenMenu(open ? "llm" : null)}
       />{" "}
-      on{" "}
-      <SentenceMenu
-        label="Dataset"
-        value={datasetId}
-        options={DATASET_OPTIONS}
-        onChange={onDatasetId}
-        open={openMenu === "dataset"}
-        onOpenChange={(open) => setOpenMenu(open ? "dataset" : null)}
-      />{`.`}
+      <span className="whitespace-nowrap">
+        on{" "}
+        <SentenceMenu
+          label="Dataset"
+          value={datasetId}
+          options={DATASET_OPTIONS}
+          onChange={onDatasetId}
+          open={openMenu === "dataset"}
+          onOpenChange={(open) => setOpenMenu(open ? "dataset" : null)}
+        />
+        {`.`}
+      </span>
     </h1>
   );
 }
