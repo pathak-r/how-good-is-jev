@@ -84,9 +84,12 @@ export function CompareLab() {
           }
         }}
       />
-      <p className="mt-4 max-w-wide text-base text-mute">
-        Each router reads the same request and must pick one of {intentCount} labeled intents. When
-        the request comes from the dataset, the gold label is shown once both calls finish.
+      <p className="mt-4 text-base text-mute">
+        Since JEV returns typed probabilistic decisions instead of generating JSON-like text, its
+        outputs conform to expected schema while avoiding extra output-token cost, latency, parsing
+        and all that. That seems to make it a natural fit for routing and other decision-heavy
+        tasks. I tested it against GPT-4.1, GPT-5.6 Sol, GPT 5.6 Terra etc. across CLINC150,
+        BANKING77, and HWU64 datasets.
       </p>
 
       <form
