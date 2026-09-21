@@ -49,6 +49,9 @@ export function SentenceMenu<T extends string>({
         className="run-select-trigger"
       >
         {selected.label}
+        <span className="run-select-caret" aria-hidden="true">
+          ▾
+        </span>
       </button>
       {open ? (
         <ul id={listId} role="listbox" aria-label={label} className="run-select-menu">

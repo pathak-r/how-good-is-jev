@@ -64,6 +64,20 @@ body {
   cursor: pointer;
 }
 
+.run-select-caret {
+  display: inline-block;
+  margin-left: 0.22em;
+  font-size: 0.58em;
+  font-weight: 500;
+  line-height: 1;
+  opacity: 0.55;
+  vertical-align: 0.18em;
+}
+
+.run-select-trigger[aria-expanded="true"] .run-select-caret {
+  transform: rotate(180deg);
+}
+
 .run-select-menu {
   position: absolute;
   left: 0;
