@@ -61,7 +61,7 @@ export const LLM_MODEL_OPTIONS = [
 ] as const;
 
 export const DEFAULT_DATASET_ID: DatasetId = "clinc150";
-export const DEFAULT_LLM_MODEL_ID: LlmModelId = "gpt-4.1";
+export const DEFAULT_LLM_MODEL_ID: LlmModelId = "gpt-5.6-terra";
 
 export function isDatasetId(value: unknown): value is DatasetId {
   return DATASET_IDS.includes(value as DatasetId);

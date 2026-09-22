@@ -22,9 +22,32 @@ const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
+const siteUrl = "https://www.rohitpathak.com/how-good-is-jev";
+const description =
+  "On a CLINC150 request, Jev and GPT-5.6 Terra both routed correctly. Jev was 97% cheaper and 95% faster.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.rohitpathak.com"),
   title: "How good is Jev?",
-  description: "Compare Jev with an LLM on the same intent-routing task.",
+  description,
+  authors: [{ name: "Rohit Pathak", url: "https://www.rohitpathak.com" }],
+  openGraph: {
+    type: "article",
+    title: "Compare Jev with GPT-5.6 Terra",
+    description,
+    url: siteUrl,
+    siteName: "Rohit Pathak",
+    authors: ["Rohit Pathak"],
+    images: [
+      {
+        url: "https://www.rohitpathak.com/how-good-is-jev/og",
+        width: 1200,
+        height: 630,
+        alt: "On a CLINC150 request, Jev and GPT-5.6 Terra both routed correctly. Jev was 97% cheaper and 95% faster.",
+        type: "image/png",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
